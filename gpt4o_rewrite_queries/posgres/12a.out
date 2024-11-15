@@ -1,0 +1,13 @@
+                                               QUERY PLAN                                               
+--------------------------------------------------------------------------------------------------------
+ Seq Scan on album  (cost=5.44..12.78 rows=2 width=23) (actual time=0.027..0.051 rows=2 loops=1)
+   Filter: (artistid = (InitPlan 1).col1)
+   Rows Removed by Filter: 345
+   InitPlan 1
+     ->  Seq Scan on artist  (cost=0.00..5.44 rows=1 width=4) (actual time=0.005..0.021 rows=1 loops=1)
+           Filter: ((name)::text = 'AC/DC'::text)
+           Rows Removed by Filter: 274
+ Planning Time: 0.909 ms
+ Execution Time: 0.073 ms
+(9 rows)
+

@@ -1,0 +1,14 @@
+                                                               QUERY PLAN                                                               
+----------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=20.58..20.59 rows=1 width=8) (actual time=0.251..0.252 rows=1 loops=1)
+   InitPlan 1
+     ->  Seq Scan on genre  (cost=0.00..13.50 rows=1 width=4) (actual time=0.004..0.006 rows=1 loops=1)
+           Filter: ((name)::text = 'Rock'::text)
+           Rows Removed by Filter: 24
+   ->  Index Only Scan using ifk_trackgenreid on track  (cost=0.28..6.73 rows=140 width=0) (actual time=0.143..0.203 rows=1297 loops=1)
+         Index Cond: (genreid = (InitPlan 1).col1)
+         Heap Fetches: 0
+ Planning Time: 1.514 ms
+ Execution Time: 0.307 ms
+(10 rows)
+

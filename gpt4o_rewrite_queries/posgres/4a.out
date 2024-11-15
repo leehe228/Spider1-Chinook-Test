@@ -1,0 +1,9 @@
+                                             QUERY PLAN                                             
+----------------------------------------------------------------------------------------------------
+ Seq Scan on customer  (cost=0.00..2.74 rows=1 width=140) (actual time=0.007..0.011 rows=1 loops=1)
+   Filter: ((state)::text = 'NY'::text)
+   Rows Removed by Filter: 58
+ Planning Time: 0.590 ms
+ Execution Time: 0.037 ms
+(5 rows)
+

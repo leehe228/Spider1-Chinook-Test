@@ -1,0 +1,13 @@
+                                                QUERY PLAN                                                
+----------------------------------------------------------------------------------------------------------
+ Seq Scan on customer  (cost=11.16..13.90 rows=30 width=8) (actual time=0.073..0.083 rows=55 loops=1)
+   Filter: (NOT (ANY (customerid = (hashed SubPlan 1).col1)))
+   Rows Removed by Filter: 4
+   SubPlan 1
+     ->  Seq Scan on invoice  (cost=0.00..11.15 rows=4 width=4) (actual time=0.018..0.061 rows=4 loops=1)
+           Filter: (total > '20'::numeric)
+           Rows Removed by Filter: 408
+ Planning Time: 0.964 ms
+ Execution Time: 0.117 ms
+(9 rows)
+

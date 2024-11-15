@@ -1,0 +1,16 @@
+                                                                QUERY PLAN                                                                
+------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=67.05..67.06 rows=1 width=32) (actual time=0.419..0.420 rows=1 loops=1)
+   ->  Nested Loop  (cost=5.37..67.02 rows=13 width=5) (actual time=0.052..0.308 rows=1297 loops=1)
+         ->  Seq Scan on genre g  (cost=0.00..13.50 rows=1 width=4) (actual time=0.005..0.007 rows=1 loops=1)
+               Filter: ((name)::text = 'Rock'::text)
+               Rows Removed by Filter: 24
+         ->  Bitmap Heap Scan on track t  (cost=5.37..52.12 rows=140 width=9) (actual time=0.045..0.196 rows=1297 loops=1)
+               Recheck Cond: (genreid = g.genreid)
+               Heap Blocks: exact=38
+               ->  Bitmap Index Scan on ifk_trackgenreid  (cost=0.00..5.33 rows=140 width=0) (actual time=0.034..0.034 rows=1297 loops=1)
+                     Index Cond: (genreid = g.genreid)
+ Planning Time: 1.375 ms
+ Execution Time: 0.471 ms
+(12 rows)
+

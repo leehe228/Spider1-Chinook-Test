@@ -1,0 +1,19 @@
+                                                            QUERY PLAN                                                             
+-----------------------------------------------------------------------------------------------------------------------------------
+ HashSetOp Except  (cost=0.00..17.96 rows=59 width=62) (actual time=0.114..0.118 rows=55 loops=1)
+   ->  Append  (cost=0.00..17.81 rows=63 width=62) (actual time=0.005..0.104 rows=63 loops=1)
+         ->  Subquery Scan on "*SELECT* 1"  (cost=0.00..3.18 rows=59 width=12) (actual time=0.004..0.014 rows=59 loops=1)
+               ->  Seq Scan on customer  (cost=0.00..2.59 rows=59 width=8) (actual time=0.003..0.008 rows=59 loops=1)
+         ->  Subquery Scan on "*SELECT* 2"  (cost=11.20..14.31 rows=4 width=12) (actual time=0.078..0.086 rows=4 loops=1)
+               ->  Hash Join  (cost=11.20..14.27 rows=4 width=8) (actual time=0.078..0.085 rows=4 loops=1)
+                     Hash Cond: (t1.customerid = t2.customerid)
+                     ->  Seq Scan on customer t1  (cost=0.00..2.59 rows=59 width=12) (actual time=0.001..0.004 rows=59 loops=1)
+                     ->  Hash  (cost=11.15..11.15 rows=4 width=4) (actual time=0.065..0.065 rows=4 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                           ->  Seq Scan on invoice t2  (cost=0.00..11.15 rows=4 width=4) (actual time=0.019..0.062 rows=4 loops=1)
+                                 Filter: (total > '20'::numeric)
+                                 Rows Removed by Filter: 408
+ Planning Time: 1.215 ms
+ Execution Time: 0.169 ms
+(15 rows)
+

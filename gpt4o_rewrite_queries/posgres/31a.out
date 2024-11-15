@@ -1,0 +1,20 @@
+                                                                                 QUERY PLAN                                                                                 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=104.07..104.08 rows=1 width=266) (actual time=0.574..0.575 rows=1 loops=1)
+   ->  Sort  (cost=104.07..104.09 rows=5 width=266) (actual time=0.573..0.574 rows=1 loops=1)
+         Sort Key: mc.trackcount
+         Sort Method: top-N heapsort  Memory: 25kB
+         ->  Hash Join  (cost=90.50..104.05 rows=5 width=266) (actual time=0.558..0.560 rows=5 loops=1)
+               Hash Cond: (m.mediatypeid = mc.mediatypeid)
+               ->  Seq Scan on mediatype m  (cost=0.00..12.80 rows=280 width=262) (actual time=0.003..0.003 rows=5 loops=1)
+               ->  Hash  (cost=90.44..90.44 rows=5 width=12) (actual time=0.547..0.548 rows=5 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                     ->  Subquery Scan on mc  (cost=0.28..90.44 rows=5 width=12) (actual time=0.490..0.545 rows=5 loops=1)
+                           ->  GroupAggregate  (cost=0.28..90.39 rows=5 width=12) (actual time=0.490..0.544 rows=5 loops=1)
+                                 Group Key: track.mediatypeid
+                                 ->  Index Only Scan using ifk_trackmediatypeid on track  (cost=0.28..72.83 rows=3503 width=4) (actual time=0.136..0.302 rows=3503 loops=1)
+                                       Heap Fetches: 0
+ Planning Time: 1.221 ms
+ Execution Time: 0.615 ms
+(16 rows)
+

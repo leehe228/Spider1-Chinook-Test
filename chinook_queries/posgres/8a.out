@@ -1,0 +1,10 @@
+                                                 QUERY PLAN                                                 
+------------------------------------------------------------------------------------------------------------
+ HashAggregate  (cost=11.15..11.39 rows=24 width=7) (actual time=0.109..0.112 rows=24 loops=1)
+   Group Key: billingcountry
+   Batches: 1  Memory Usage: 24kB
+   ->  Seq Scan on invoice  (cost=0.00..10.12 rows=412 width=7) (actual time=0.008..0.032 rows=412 loops=1)
+ Planning Time: 0.612 ms
+ Execution Time: 0.169 ms
+(6 rows)
+

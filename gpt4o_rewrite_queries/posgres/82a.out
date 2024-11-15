@@ -1,0 +1,24 @@
+                                                               QUERY PLAN                                                               
+----------------------------------------------------------------------------------------------------------------------------------------
+ GroupAggregate  (cost=110.39..111.15 rows=1 width=27) (actual time=1.942..2.038 rows=1 loops=1)
+   Group Key: a.albumid
+   Filter: (count(DISTINCT g.name) = 2)
+   Rows Removed by Filter: 119
+   ->  Sort  (cost=110.39..110.49 rows=38 width=285) (actual time=1.836..1.878 rows=1355 loops=1)
+         Sort Key: a.albumid, g.name
+         Sort Method: quicksort  Memory: 114kB
+         ->  Nested Loop  (cost=13.69..109.39 rows=38 width=285) (actual time=0.029..1.534 rows=1355 loops=1)
+               ->  Hash Join  (cost=13.54..102.91 rows=38 width=262) (actual time=0.023..0.610 rows=1355 loops=1)
+                     Hash Cond: (t.genreid = g.genreid)
+                     ->  Seq Scan on track t  (cost=0.00..80.03 rows=3503 width=8) (actual time=0.005..0.190 rows=3503 loops=1)
+                     ->  Hash  (cost=13.50..13.50 rows=3 width=262) (actual time=0.009..0.010 rows=2 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                           ->  Seq Scan on genre g  (cost=0.00..13.50 rows=3 width=262) (actual time=0.004..0.007 rows=2 loops=1)
+                                 Filter: ((name)::text = ANY ('{Reggae,Rock}'::text[]))
+                                 Rows Removed by Filter: 23
+               ->  Index Scan using pk_album on album a  (cost=0.15..0.17 rows=1 width=27) (actual time=0.000..0.000 rows=1 loops=1355)
+                     Index Cond: (albumid = t.albumid)
+ Planning Time: 1.977 ms
+ Execution Time: 2.089 ms
+(20 rows)
+

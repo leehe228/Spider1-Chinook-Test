@@ -1,0 +1,25 @@
+
+ SQL Server Execution Times:
+   CPU time = 0 ms,  elapsed time = 0 ms.
+Title                                                                                                                                                            AlbumId    
+---------------------------------------------------------------------------------------------------------------------------------------------------------------- -----------
+Battlestar Galactica: The Story So Far                                                                                                                                   226
+Battlestar Galactica, Season 3                                                                                                                                           227
+Heroes, Season 1                                                                                                                                                         228
+Lost, Season 3                                                                                                                                                           229
+Lost, Season 1                                                                                                                                                           230
+Lost, Season 2                                                                                                                                                           231
+The Office, Season 1                                                                                                                                                     249
+The Office, Season 2                                                                                                                                                     250
+The Office, Season 3                                                                                                                                                     251
+Battlestar Galactica (Classic), Season 1                                                                                                                                 253
+Aquaman                                                                                                                                                                  254
+LOST, Season 4                                                                                                                                                           261
+
+(12 rows affected)
+Table 'Worktable'. Scan count 0, logical reads 0, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
+Table 'Track'. Scan count 1, logical reads 53, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
+Table 'Album'. Scan count 1, logical reads 4, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
+
+ SQL Server Execution Times:
+   CPU time = 1 ms,  elapsed time = 0 ms.

@@ -1,0 +1,2 @@
+Msg 8120, Level 16, State 1, Server sql1, Line 3
+Column 'ARTIST.Name' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.

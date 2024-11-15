@@ -1,0 +1,18 @@
+                                                         QUERY PLAN                                                          
+-----------------------------------------------------------------------------------------------------------------------------
+ Unique  (cost=3.88..3.89 rows=1 width=98) (actual time=0.046..0.047 rows=1 loops=1)
+   ->  Sort  (cost=3.88..3.88 rows=1 width=98) (actual time=0.044..0.045 rows=1 loops=1)
+         Sort Key: t2.city
+         Sort Method: quicksort  Memory: 25kB
+         ->  Hash Join  (cost=2.75..3.87 rows=1 width=98) (actual time=0.027..0.028 rows=1 loops=1)
+               Hash Cond: (t2.employeeid = t1.supportrepid)
+               ->  Seq Scan on employee t2  (cost=0.00..1.08 rows=8 width=102) (actual time=0.005..0.006 rows=8 loops=1)
+               ->  Hash  (cost=2.74..2.74 rows=1 width=4) (actual time=0.012..0.012 rows=1 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                     ->  Seq Scan on customer t1  (cost=0.00..2.74 rows=1 width=4) (actual time=0.004..0.010 rows=1 loops=1)
+                           Filter: ((postalcode)::text = '70174'::text)
+                           Rows Removed by Filter: 58
+ Planning Time: 1.074 ms
+ Execution Time: 0.083 ms
+(14 rows)
+

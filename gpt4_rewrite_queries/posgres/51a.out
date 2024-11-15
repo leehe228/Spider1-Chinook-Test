@@ -1,0 +1,14 @@
+                                                   QUERY PLAN                                                    
+-----------------------------------------------------------------------------------------------------------------
+ Hash Right Anti Join  (cost=3.33..14.49 rows=55 width=8) (actual time=0.099..0.106 rows=55 loops=1)
+   Hash Cond: (invoice.customerid = customer.customerid)
+   ->  Seq Scan on invoice  (cost=0.00..11.15 rows=4 width=4) (actual time=0.019..0.060 rows=4 loops=1)
+         Filter: (total > '20'::numeric)
+         Rows Removed by Filter: 408
+   ->  Hash  (cost=2.59..2.59 rows=59 width=12) (actual time=0.024..0.024 rows=59 loops=1)
+         Buckets: 1024  Batches: 1  Memory Usage: 11kB
+         ->  Seq Scan on customer  (cost=0.00..2.59 rows=59 width=12) (actual time=0.006..0.011 rows=59 loops=1)
+ Planning Time: 1.599 ms
+ Execution Time: 0.138 ms
+(10 rows)
+

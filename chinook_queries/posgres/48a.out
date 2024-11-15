@@ -1,0 +1,15 @@
+                                                             QUERY PLAN                                                             
+------------------------------------------------------------------------------------------------------------------------------------
+ Nested Loop  (cost=4.20..13.55 rows=7 width=8) (actual time=0.022..0.031 rows=7 loops=1)
+   ->  Seq Scan on customer t1  (cost=0.00..2.88 rows=1 width=4) (actual time=0.007..0.011 rows=1 loops=1)
+         Filter: (((firstname)::text = 'Astrid'::text) AND ((lastname)::text = 'Gruber'::text))
+         Rows Removed by Filter: 58
+   ->  Bitmap Heap Scan on invoice t2  (cost=4.20..10.60 rows=7 width=12) (actual time=0.013..0.017 rows=7 loops=1)
+         Recheck Cond: (t1.customerid = customerid)
+         Heap Blocks: exact=4
+         ->  Bitmap Index Scan on ifk_invoicecustomerid  (cost=0.00..4.20 rows=7 width=0) (actual time=0.009..0.009 rows=7 loops=1)
+               Index Cond: (customerid = t1.customerid)
+ Planning Time: 1.206 ms
+ Execution Time: 0.064 ms
+(11 rows)
+

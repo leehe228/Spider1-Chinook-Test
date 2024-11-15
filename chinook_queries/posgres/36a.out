@@ -1,0 +1,16 @@
+                                                               QUERY PLAN                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=67.05..67.06 rows=1 width=32) (actual time=0.101..0.101 rows=1 loops=1)
+   ->  Nested Loop  (cost=5.37..67.02 rows=13 width=5) (actual time=0.023..0.078 rows=130 loops=1)
+         ->  Seq Scan on genre t1  (cost=0.00..13.50 rows=1 width=4) (actual time=0.005..0.007 rows=1 loops=1)
+               Filter: ((name)::text = 'Jazz'::text)
+               Rows Removed by Filter: 24
+         ->  Bitmap Heap Scan on track t2  (cost=5.37..52.12 rows=140 width=9) (actual time=0.016..0.059 rows=130 loops=1)
+               Recheck Cond: (t1.genreid = genreid)
+               Heap Blocks: exact=13
+               ->  Bitmap Index Scan on ifk_trackgenreid  (cost=0.00..5.33 rows=140 width=0) (actual time=0.010..0.010 rows=130 loops=1)
+                     Index Cond: (genreid = t1.genreid)
+ Planning Time: 1.282 ms
+ Execution Time: 0.152 ms
+(12 rows)
+

@@ -1,0 +1,10 @@
+                                                QUERY PLAN                                                
+----------------------------------------------------------------------------------------------------------
+ Sort  (cost=21.11..21.98 rows=347 width=23) (actual time=0.184..0.195 rows=347 loops=1)
+   Sort Key: title
+   Sort Method: quicksort  Memory: 25kB
+   ->  Seq Scan on album  (cost=0.00..6.47 rows=347 width=23) (actual time=0.005..0.028 rows=347 loops=1)
+ Planning Time: 0.590 ms
+ Execution Time: 0.229 ms
+(6 rows)
+

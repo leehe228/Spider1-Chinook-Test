@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM ARTIST a LEFT JOIN ALBUM al ON a.ArtistId = al.ArtistId WHERE al.AlbumId IS NULL

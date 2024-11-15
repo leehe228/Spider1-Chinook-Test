@@ -1,0 +1,11 @@
+                                                QUERY PLAN                                                 
+-----------------------------------------------------------------------------------------------------------
+ Seq Scan on artist  (cost=7.34..12.78 rows=138 width=21) (actual time=0.091..0.128 rows=71 loops=1)
+   Filter: (NOT (ANY (artistid = (hashed SubPlan 1).col1)))
+   Rows Removed by Filter: 204
+   SubPlan 1
+     ->  Seq Scan on album  (cost=0.00..6.47 rows=347 width=4) (actual time=0.005..0.028 rows=347 loops=1)
+ Planning Time: 0.848 ms
+ Execution Time: 0.181 ms
+(7 rows)
+

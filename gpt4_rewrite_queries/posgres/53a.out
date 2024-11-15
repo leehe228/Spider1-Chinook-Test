@@ -1,0 +1,17 @@
+                                                      QUERY PLAN                                                       
+-----------------------------------------------------------------------------------------------------------------------
+ HashAggregate  (cost=14.17..14.22 rows=5 width=6) (actual time=0.090..0.092 rows=5 loops=1)
+   Group Key: c.firstname
+   Batches: 1  Memory Usage: 24kB
+   ->  Hash Join  (cost=2.80..14.08 rows=35 width=6) (actual time=0.031..0.082 rows=35 loops=1)
+         Hash Cond: (i.customerid = c.customerid)
+         ->  Seq Scan on invoice i  (cost=0.00..10.12 rows=412 width=4) (actual time=0.004..0.026 rows=412 loops=1)
+         ->  Hash  (cost=2.74..2.74 rows=5 width=10) (actual time=0.013..0.013 rows=5 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               ->  Seq Scan on customer c  (cost=0.00..2.74 rows=5 width=10) (actual time=0.003..0.010 rows=5 loops=1)
+                     Filter: ((country)::text = 'Brazil'::text)
+                     Rows Removed by Filter: 54
+ Planning Time: 1.141 ms
+ Execution Time: 0.134 ms
+(13 rows)
+

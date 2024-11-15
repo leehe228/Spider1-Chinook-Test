@@ -1,0 +1,9 @@
+                                             QUERY PLAN                                              
+-----------------------------------------------------------------------------------------------------
+ Seq Scan on artist  (cost=0.00..5.44 rows=211 width=21) (actual time=0.006..0.164 rows=211 loops=1)
+   Filter: ((name)::text ~~* '%a%'::text)
+   Rows Removed by Filter: 64
+ Planning Time: 0.544 ms
+ Execution Time: 0.194 ms
+(5 rows)
+

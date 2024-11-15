@@ -1,0 +1,12 @@
+                                                   QUERY PLAN                                                    
+-----------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=13.12..13.13 rows=1 width=8) (actual time=0.134..0.135 rows=1 loops=1)
+   ->  Seq Scan on artist  (cost=7.34..12.78 rows=138 width=0) (actual time=0.093..0.130 rows=71 loops=1)
+         Filter: (NOT (ANY (artistid = (hashed SubPlan 1).col1)))
+         Rows Removed by Filter: 204
+         SubPlan 1
+           ->  Seq Scan on album  (cost=0.00..6.47 rows=347 width=4) (actual time=0.004..0.027 rows=347 loops=1)
+ Planning Time: 0.990 ms
+ Execution Time: 0.238 ms
+(8 rows)
+

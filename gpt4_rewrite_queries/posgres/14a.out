@@ -1,0 +1,16 @@
+                                                              QUERY PLAN                                                               
+---------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=12.75..12.76 rows=1 width=8) (actual time=0.038..0.039 rows=1 loops=1)
+   ->  Nested Loop  (cost=4.16..12.75 rows=1 width=0) (actual time=0.019..0.036 rows=10 loops=1)
+         ->  Seq Scan on artist  (cost=0.00..5.44 rows=1 width=4) (actual time=0.008..0.021 rows=1 loops=1)
+               Filter: ((name)::text = 'Metallica'::text)
+               Rows Removed by Filter: 274
+         ->  Bitmap Heap Scan on album  (cost=4.16..7.29 rows=2 width=4) (actual time=0.009..0.011 rows=10 loops=1)
+               Recheck Cond: (artistid = artist.artistid)
+               Heap Blocks: exact=2
+               ->  Bitmap Index Scan on ifk_albumartistid  (cost=0.00..4.16 rows=2 width=0) (actual time=0.006..0.006 rows=10 loops=1)
+                     Index Cond: (artistid = artist.artistid)
+ Planning Time: 1.205 ms
+ Execution Time: 0.087 ms
+(12 rows)
+

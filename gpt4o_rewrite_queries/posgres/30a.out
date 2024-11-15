@@ -1,0 +1,19 @@
+                                                               QUERY PLAN                                                                
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=127.38..127.39 rows=1 width=270) (actual time=1.242..1.243 rows=1 loops=1)
+   ->  Sort  (cost=127.38..128.08 rows=280 width=270) (actual time=1.241..1.242 rows=1 loops=1)
+         Sort Key: (count(t2.trackid))
+         Sort Method: top-N heapsort  Memory: 25kB
+         ->  HashAggregate  (cost=123.18..125.98 rows=280 width=270) (actual time=1.222..1.225 rows=5 loops=1)
+               Group Key: t1.mediatypeid
+               Batches: 1  Memory Usage: 37kB
+               ->  Hash Join  (cost=16.30..105.67 rows=3503 width=266) (actual time=0.018..0.783 rows=3503 loops=1)
+                     Hash Cond: (t2.mediatypeid = t1.mediatypeid)
+                     ->  Seq Scan on track t2  (cost=0.00..80.03 rows=3503 width=8) (actual time=0.003..0.180 rows=3503 loops=1)
+                     ->  Hash  (cost=12.80..12.80 rows=280 width=262) (actual time=0.007..0.007 rows=5 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                           ->  Seq Scan on mediatype t1  (cost=0.00..12.80 rows=280 width=262) (actual time=0.002..0.003 rows=5 loops=1)
+ Planning Time: 1.164 ms
+ Execution Time: 1.298 ms
+(15 rows)
+

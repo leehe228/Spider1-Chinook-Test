@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM TRACK AS T2 WHERE T2.MediaTypeId = (SELECT MediaTypeId FROM MEDIATYPE WHERE Name = 'AAC audio file')

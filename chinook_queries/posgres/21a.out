@@ -1,0 +1,9 @@
+                                           QUERY PLAN                                            
+-------------------------------------------------------------------------------------------------
+ Seq Scan on track  (cost=0.00..88.79 rows=1 width=16) (actual time=0.085..0.394 rows=1 loops=1)
+   Filter: ((name)::text ~~ '%you%'::text)
+   Rows Removed by Filter: 3502
+ Planning Time: 0.911 ms
+ Execution Time: 0.419 ms
+(5 rows)
+

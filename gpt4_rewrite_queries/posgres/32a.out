@@ -1,0 +1,17 @@
+                                                       QUERY PLAN                                                       
+------------------------------------------------------------------------------------------------------------------------
+ HashAggregate  (cost=100.70..102.83 rows=213 width=27) (actual time=0.598..0.601 rows=12 loops=1)
+   Group Key: a.albumid
+   Batches: 1  Memory Usage: 40kB
+   ->  Hash Join  (cost=10.81..100.17 rows=213 width=27) (actual time=0.447..0.572 rows=213 loops=1)
+         Hash Cond: (t.albumid = a.albumid)
+         ->  Seq Scan on track t  (cost=0.00..88.79 rows=213 width=4) (actual time=0.354..0.446 rows=213 loops=1)
+               Filter: (unitprice > '1'::numeric)
+               Rows Removed by Filter: 3290
+         ->  Hash  (cost=6.47..6.47 rows=347 width=27) (actual time=0.079..0.079 rows=347 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 29kB
+               ->  Seq Scan on album a  (cost=0.00..6.47 rows=347 width=27) (actual time=0.003..0.031 rows=347 loops=1)
+ Planning Time: 1.790 ms
+ Execution Time: 0.642 ms
+(13 rows)
+

@@ -1,0 +1,15 @@
+                                                     QUERY PLAN                                                      
+---------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=103.70..103.71 rows=1 width=32) (actual time=0.579..0.580 rows=1 loops=1)
+   ->  Hash Join  (cost=14.24..103.61 rows=38 width=4) (actual time=0.047..0.537 rows=627 loops=1)
+         Hash Cond: (t2.genreid = t1.genreid)
+         ->  Seq Scan on track t2  (cost=0.00..80.03 rows=3503 width=8) (actual time=0.003..0.197 rows=3503 loops=1)
+         ->  Hash  (cost=14.20..14.20 rows=3 width=4) (actual time=0.010..0.010 rows=2 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               ->  Seq Scan on genre t1  (cost=0.00..14.20 rows=3 width=4) (actual time=0.005..0.007 rows=2 loops=1)
+                     Filter: (((name)::text = 'Latin'::text) OR ((name)::text = 'Pop'::text))
+                     Rows Removed by Filter: 23
+ Planning Time: 1.870 ms
+ Execution Time: 0.646 ms
+(11 rows)
+

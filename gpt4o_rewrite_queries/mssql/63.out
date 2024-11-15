@@ -1,0 +1,7 @@
+FirstName            SupportRepId
+-------------------- ------------
+Jane                            3
+Margaret                        4
+Steve                           5
+
+(3 rows affected)

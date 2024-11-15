@@ -1,0 +1,14 @@
+                                                   QUERY PLAN                                                   
+----------------------------------------------------------------------------------------------------------------
+ Hash Join  (cost=2.75..3.87 rows=1 width=116) (actual time=0.031..0.032 rows=1 loops=1)
+   Hash Cond: (e.employeeid = c.supportrepid)
+   ->  Seq Scan on employee e  (cost=0.00..1.08 rows=8 width=120) (actual time=0.007..0.008 rows=8 loops=1)
+   ->  Hash  (cost=2.74..2.74 rows=1 width=4) (actual time=0.012..0.012 rows=1 loops=1)
+         Buckets: 1024  Batches: 1  Memory Usage: 9kB
+         ->  Seq Scan on customer c  (cost=0.00..2.74 rows=1 width=4) (actual time=0.004..0.008 rows=1 loops=1)
+               Filter: ((firstname)::text = 'Leonie'::text)
+               Rows Removed by Filter: 58
+ Planning Time: 1.154 ms
+ Execution Time: 0.065 ms
+(10 rows)
+

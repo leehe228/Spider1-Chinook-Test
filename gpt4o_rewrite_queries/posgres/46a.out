@@ -1,0 +1,11 @@
+                                                  QUERY PLAN                                                   
+---------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=1.24..1.25 rows=1 width=8) (actual time=0.029..0.029 rows=1 loops=1)
+   ->  Sort  (cost=1.20..1.22 rows=8 width=98) (actual time=0.023..0.024 rows=8 loops=1)
+         Sort Key: city
+         Sort Method: quicksort  Memory: 25kB
+         ->  Seq Scan on employee  (cost=0.00..1.08 rows=8 width=98) (actual time=0.007..0.008 rows=8 loops=1)
+ Planning Time: 0.523 ms
+ Execution Time: 0.082 ms
+(7 rows)
+

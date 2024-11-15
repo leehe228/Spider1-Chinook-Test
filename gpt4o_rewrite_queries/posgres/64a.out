@@ -1,0 +1,17 @@
+                                                       QUERY PLAN                                                       
+------------------------------------------------------------------------------------------------------------------------
+ HashAggregate  (cost=4.30..4.40 rows=3 width=58) (actual time=0.049..0.050 rows=2 loops=1)
+   Group Key: t2.lastname
+   Filter: (count(*) <= 20)
+   Batches: 1  Memory Usage: 24kB
+   Rows Removed by Filter: 1
+   ->  Hash Join  (cost=1.18..4.00 rows=59 width=58) (actual time=0.021..0.037 rows=59 loops=1)
+         Hash Cond: (t1.supportrepid = t2.employeeid)
+         ->  Seq Scan on customer t1  (cost=0.00..2.59 rows=59 width=4) (actual time=0.003..0.006 rows=59 loops=1)
+         ->  Hash  (cost=1.08..1.08 rows=8 width=62) (actual time=0.011..0.011 rows=8 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 9kB
+               ->  Seq Scan on employee t2  (cost=0.00..1.08 rows=8 width=62) (actual time=0.005..0.006 rows=8 loops=1)
+ Planning Time: 1.106 ms
+ Execution Time: 0.114 ms
+(13 rows)
+

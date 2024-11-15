@@ -1,0 +1,10 @@
+                                                 QUERY PLAN                                                 
+------------------------------------------------------------------------------------------------------------
+ HashAggregate  (cost=88.79..88.81 rows=2 width=5) (actual time=0.972..0.973 rows=2 loops=1)
+   Group Key: unitprice
+   Batches: 1  Memory Usage: 24kB
+   ->  Seq Scan on track  (cost=0.00..80.03 rows=3503 width=5) (actual time=0.003..0.182 rows=3503 loops=1)
+ Planning Time: 0.847 ms
+ Execution Time: 1.028 ms
+(6 rows)
+

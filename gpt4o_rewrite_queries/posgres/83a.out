@@ -1,0 +1,26 @@
+                                                               QUERY PLAN                                                               
+----------------------------------------------------------------------------------------------------------------------------------------
+ Hash Join  (cost=104.68..112.07 rows=1 width=23) (actual time=1.017..1.040 rows=1 loops=1)
+   Hash Cond: (album.albumid = t.albumid)
+   ->  Seq Scan on album  (cost=0.00..6.47 rows=347 width=27) (actual time=0.004..0.020 rows=347 loops=1)
+   ->  Hash  (cost=104.66..104.66 rows=1 width=4) (actual time=0.988..0.989 rows=1 loops=1)
+         Buckets: 1024  Batches: 1  Memory Usage: 9kB
+         ->  GroupAggregate  (cost=103.90..104.66 rows=1 width=4) (actual time=0.892..0.986 rows=1 loops=1)
+               Group Key: t.albumid
+               Filter: (count(DISTINCT g.name) = 2)
+               Rows Removed by Filter: 119
+               ->  Sort  (cost=103.90..104.00 rows=38 width=262) (actual time=0.790..0.832 rows=1355 loops=1)
+                     Sort Key: t.albumid, g.name
+                     Sort Method: quicksort  Memory: 91kB
+                     ->  Hash Join  (cost=13.54..102.91 rows=38 width=262) (actual time=0.019..0.586 rows=1355 loops=1)
+                           Hash Cond: (t.genreid = g.genreid)
+                           ->  Seq Scan on track t  (cost=0.00..80.03 rows=3503 width=8) (actual time=0.002..0.181 rows=3503 loops=1)
+                           ->  Hash  (cost=13.50..13.50 rows=3 width=262) (actual time=0.009..0.009 rows=2 loops=1)
+                                 Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                 ->  Seq Scan on genre g  (cost=0.00..13.50 rows=3 width=262) (actual time=0.004..0.006 rows=2 loops=1)
+                                       Filter: ((name)::text = ANY ('{Reggae,Rock}'::text[]))
+                                       Rows Removed by Filter: 23
+ Planning Time: 1.762 ms
+ Execution Time: 1.102 ms
+(22 rows)
+

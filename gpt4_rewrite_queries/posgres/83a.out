@@ -1,0 +1,33 @@
+                                                                         QUERY PLAN                                                                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Nested Loop  (cost=67.63..91.21 rows=1 width=23) (actual time=0.992..1.128 rows=13 loops=1)
+   ->  Nested Loop  (cost=67.48..91.04 rows=1 width=8) (actual time=0.987..1.114 rows=13 loops=1)
+         ->  Nested Loop  (cost=67.33..82.04 rows=173 width=12) (actual time=0.464..0.828 rows=1332 loops=1)
+               ->  HashAggregate  (cost=67.05..67.18 rows=13 width=4) (actual time=0.456..0.469 rows=117 loops=1)
+                     Group Key: t4.albumid
+                     Batches: 1  Memory Usage: 48kB
+                     ->  Nested Loop  (cost=5.37..67.02 rows=13 width=4) (actual time=0.052..0.289 rows=1297 loops=1)
+                           ->  Seq Scan on genre t5  (cost=0.00..13.50 rows=1 width=4) (actual time=0.006..0.008 rows=1 loops=1)
+                                 Filter: ((name)::text = 'Rock'::text)
+                                 Rows Removed by Filter: 24
+                           ->  Bitmap Heap Scan on track t4  (cost=5.37..52.12 rows=140 width=8) (actual time=0.045..0.194 rows=1297 loops=1)
+                                 Recheck Cond: (genreid = t5.genreid)
+                                 Heap Blocks: exact=38
+                                 ->  Bitmap Index Scan on ifk_trackgenreid  (cost=0.00..5.33 rows=140 width=0) (actual time=0.035..0.035 rows=1297 loops=1)
+                                       Index Cond: (genreid = t5.genreid)
+               ->  Index Scan using ifk_trackalbumid on track t2  (cost=0.28..1.04 rows=10 width=8) (actual time=0.001..0.002 rows=11 loops=117)
+                     Index Cond: (albumid = t4.albumid)
+         ->  Memoize  (cost=0.16..0.19 rows=1 width=4) (actual time=0.000..0.000 rows=0 loops=1332)
+               Cache Key: t2.genreid
+               Cache Mode: logical
+               Hits: 1329  Misses: 3  Evictions: 0  Overflows: 0  Memory Usage: 1kB
+               ->  Index Scan using pk_genre on genre t3  (cost=0.15..0.18 rows=1 width=4) (actual time=0.003..0.003 rows=0 loops=3)
+                     Index Cond: (genreid = t2.genreid)
+                     Filter: ((name)::text = 'Reggae'::text)
+                     Rows Removed by Filter: 1
+   ->  Index Scan using pk_album on album t1  (cost=0.15..0.17 rows=1 width=27) (actual time=0.001..0.001 rows=1 loops=13)
+         Index Cond: (albumid = t2.albumid)
+ Planning Time: 2.454 ms
+ Execution Time: 1.227 ms
+(29 rows)
+

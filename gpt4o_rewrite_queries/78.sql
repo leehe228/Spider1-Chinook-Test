@@ -1,0 +1,1 @@
+SELECT DISTINCT UnitPrice FROM Track

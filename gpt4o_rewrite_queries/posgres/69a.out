@@ -1,0 +1,20 @@
+                                                           QUERY PLAN                                                           
+--------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=26.50..26.79 rows=116 width=25) (actual time=0.294..0.296 rows=26 loops=1)
+   Sort Key: t2.name
+   Sort Method: quicksort  Memory: 25kB
+   ->  HashAggregate  (cost=18.18..22.52 rows=116 width=25) (actual time=0.248..0.271 rows=26 loops=1)
+         Group Key: t2.name, t1.artistid
+         Filter: (count(t1.albumid) >= 3)
+         Batches: 1  Memory Usage: 61kB
+         Rows Removed by Filter: 178
+         ->  Hash Join  (cost=8.19..15.58 rows=347 width=29) (actual time=0.085..0.162 rows=347 loops=1)
+               Hash Cond: (t1.artistid = t2.artistid)
+               ->  Seq Scan on album t1  (cost=0.00..6.47 rows=347 width=8) (actual time=0.004..0.021 rows=347 loops=1)
+               ->  Hash  (cost=4.75..4.75 rows=275 width=25) (actual time=0.071..0.071 rows=275 loops=1)
+                     Buckets: 1024  Batches: 1  Memory Usage: 24kB
+                     ->  Seq Scan on artist t2  (cost=0.00..4.75 rows=275 width=25) (actual time=0.004..0.025 rows=275 loops=1)
+ Planning Time: 1.041 ms
+ Execution Time: 0.365 ms
+(16 rows)
+

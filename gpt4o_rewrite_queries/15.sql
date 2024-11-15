@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM ALBUM WHERE ArtistId = (SELECT ArtistId FROM ARTIST WHERE Name = 'Metallica')

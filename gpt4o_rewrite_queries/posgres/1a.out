@@ -1,0 +1,8 @@
+                                               QUERY PLAN                                                
+---------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=7.34..7.35 rows=1 width=8) (actual time=0.042..0.043 rows=1 loops=1)
+   ->  Seq Scan on album  (cost=0.00..6.47 rows=347 width=4) (actual time=0.004..0.021 rows=347 loops=1)
+ Planning Time: 0.574 ms
+ Execution Time: 0.098 ms
+(4 rows)
+

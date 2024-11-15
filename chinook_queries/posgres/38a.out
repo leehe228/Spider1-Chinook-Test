@@ -1,0 +1,9 @@
+                                            QUERY PLAN                                             
+---------------------------------------------------------------------------------------------------
+ Seq Scan on customer  (cost=0.00..2.74 rows=1 width=14) (actual time=0.006..0.013 rows=1 loops=1)
+   Filter: ((email)::text = 'luisg@embraer.com.br'::text)
+   Rows Removed by Filter: 58
+ Planning Time: 0.564 ms
+ Execution Time: 0.040 ms
+(5 rows)
+

@@ -1,0 +1,17 @@
+                                                                      QUERY PLAN                                                                      
+------------------------------------------------------------------------------------------------------------------------------------------------------
+ Unique  (cost=11.79..11.82 rows=5 width=6) (actual time=0.041..0.044 rows=5 loops=1)
+   ->  Sort  (cost=11.79..11.80 rows=5 width=6) (actual time=0.041..0.042 rows=5 loops=1)
+         Sort Key: customer.firstname
+         Sort Method: quicksort  Memory: 25kB
+         ->  Nested Loop Semi Join  (cost=0.15..11.73 rows=5 width=6) (actual time=0.012..0.023 rows=5 loops=1)
+               ->  Seq Scan on customer  (cost=0.00..2.74 rows=5 width=10) (actual time=0.005..0.011 rows=5 loops=1)
+                     Filter: ((country)::text = 'Brazil'::text)
+                     Rows Removed by Filter: 54
+               ->  Index Only Scan using ifk_invoicecustomerid on invoice  (cost=0.15..6.67 rows=7 width=4) (actual time=0.002..0.002 rows=1 loops=5)
+                     Index Cond: (customerid = customer.customerid)
+                     Heap Fetches: 5
+ Planning Time: 1.133 ms
+ Execution Time: 0.075 ms
+(13 rows)
+

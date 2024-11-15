@@ -1,0 +1,14 @@
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=41.09..41.10 rows=1 width=8) (actual time=0.143..0.144 rows=1 loops=1)
+   ->  Nested Loop  (cost=0.28..41.06 rows=13 width=0) (actual time=0.138..0.141 rows=11 loops=1)
+         ->  Seq Scan on mediatype t1  (cost=0.00..13.50 rows=1 width=4) (actual time=0.005..0.006 rows=1 loops=1)
+               Filter: ((name)::text = 'AAC audio file'::text)
+               Rows Removed by Filter: 4
+         ->  Index Only Scan using ifk_trackmediatypeid on track t2  (cost=0.28..20.55 rows=701 width=4) (actual time=0.131..0.132 rows=11 loops=1)
+               Index Cond: (mediatypeid = t1.mediatypeid)
+               Heap Fetches: 0
+ Planning Time: 2.229 ms
+ Execution Time: 0.188 ms
+(10 rows)
+

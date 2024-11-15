@@ -1,0 +1,9 @@
+                                            QUERY PLAN                                            
+--------------------------------------------------------------------------------------------------
+ Seq Scan on employee  (cost=0.00..1.10 rows=1 width=8) (actual time=0.008..0.010 rows=1 loops=1)
+   Filter: ((city)::text = 'Edmonton'::text)
+   Rows Removed by Filter: 7
+ Planning Time: 0.510 ms
+ Execution Time: 0.039 ms
+(5 rows)
+

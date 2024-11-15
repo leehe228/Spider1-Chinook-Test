@@ -1,0 +1,34 @@
+                                                                         QUERY PLAN                                                                         
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+ HashSetOp Intersect  (cost=5.51..138.92 rows=13 width=342) (actual time=1.494..1.495 rows=1 loops=1)
+   ->  Append  (cost=5.51..138.86 rows=26 width=342) (actual time=0.031..1.380 rows=1355 loops=1)
+         ->  Subquery Scan on "*SELECT* 1"  (cost=5.51..69.36 rows=13 width=27) (actual time=0.031..0.093 rows=58 loops=1)
+               ->  Nested Loop  (cost=5.51..69.23 rows=13 width=23) (actual time=0.030..0.088 rows=58 loops=1)
+                     ->  Nested Loop  (cost=5.37..67.02 rows=13 width=4) (actual time=0.024..0.043 rows=58 loops=1)
+                           ->  Seq Scan on genre t3  (cost=0.00..13.50 rows=1 width=4) (actual time=0.005..0.007 rows=1 loops=1)
+                                 Filter: ((name)::text = 'Reggae'::text)
+                                 Rows Removed by Filter: 24
+                           ->  Bitmap Heap Scan on track t2  (cost=5.37..52.12 rows=140 width=8) (actual time=0.018..0.030 rows=58 loops=1)
+                                 Recheck Cond: (genreid = t3.genreid)
+                                 Heap Blocks: exact=4
+                                 ->  Bitmap Index Scan on ifk_trackgenreid  (cost=0.00..5.33 rows=140 width=0) (actual time=0.008..0.009 rows=58 loops=1)
+                                       Index Cond: (genreid = t3.genreid)
+                     ->  Index Scan using pk_album on album t1  (cost=0.15..0.17 rows=1 width=27) (actual time=0.001..0.001 rows=1 loops=58)
+                           Index Cond: (albumid = t2.albumid)
+         ->  Subquery Scan on "*SELECT* 2"  (cost=5.51..69.36 rows=13 width=27) (actual time=0.048..1.194 rows=1297 loops=1)
+               ->  Nested Loop  (cost=5.51..69.23 rows=13 width=23) (actual time=0.048..1.098 rows=1297 loops=1)
+                     ->  Nested Loop  (cost=5.37..67.02 rows=13 width=4) (actual time=0.043..0.258 rows=1297 loops=1)
+                           ->  Seq Scan on genre t3_1  (cost=0.00..13.50 rows=1 width=4) (actual time=0.002..0.003 rows=1 loops=1)
+                                 Filter: ((name)::text = 'Rock'::text)
+                                 Rows Removed by Filter: 24
+                           ->  Bitmap Heap Scan on track t2_1  (cost=5.37..52.12 rows=140 width=8) (actual time=0.041..0.164 rows=1297 loops=1)
+                                 Recheck Cond: (genreid = t3_1.genreid)
+                                 Heap Blocks: exact=38
+                                 ->  Bitmap Index Scan on ifk_trackgenreid  (cost=0.00..5.33 rows=140 width=0) (actual time=0.033..0.033 rows=1297 loops=1)
+                                       Index Cond: (genreid = t3_1.genreid)
+                     ->  Index Scan using pk_album on album t1_1  (cost=0.15..0.17 rows=1 width=27) (actual time=0.000..0.000 rows=1 loops=1297)
+                           Index Cond: (albumid = t2_1.albumid)
+ Planning Time: 2.135 ms
+ Execution Time: 1.584 ms
+(30 rows)
+

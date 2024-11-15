@@ -1,0 +1,16 @@
+                                                                    QUERY PLAN                                                                    
+--------------------------------------------------------------------------------------------------------------------------------------------------
+ HashAggregate  (cost=114.45..117.92 rows=347 width=35) (actual time=1.276..1.320 rows=347 loops=1)
+   Group Key: a.albumid
+   Batches: 1  Memory Usage: 93kB
+   ->  Hash Join  (cost=11.09..96.94 rows=3503 width=27) (actual time=0.112..0.798 rows=3503 loops=1)
+         Hash Cond: (t.albumid = a.albumid)
+         ->  Index Only Scan using ifk_trackalbumid on track t  (cost=0.28..76.83 rows=3503 width=4) (actual time=0.009..0.189 rows=3503 loops=1)
+               Heap Fetches: 0
+         ->  Hash  (cost=6.47..6.47 rows=347 width=27) (actual time=0.090..0.091 rows=347 loops=1)
+               Buckets: 1024  Batches: 1  Memory Usage: 29kB
+               ->  Seq Scan on album a  (cost=0.00..6.47 rows=347 width=27) (actual time=0.005..0.034 rows=347 loops=1)
+ Planning Time: 1.618 ms
+ Execution Time: 1.384 ms
+(12 rows)
+

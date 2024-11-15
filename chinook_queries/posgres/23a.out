@@ -1,0 +1,8 @@
+                                                 QUERY PLAN                                                 
+------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=88.79..88.80 rows=1 width=32) (actual time=0.590..0.590 rows=1 loops=1)
+   ->  Seq Scan on track  (cost=0.00..80.03 rows=3503 width=5) (actual time=0.002..0.196 rows=3503 loops=1)
+ Planning Time: 0.840 ms
+ Execution Time: 0.650 ms
+(4 rows)
+

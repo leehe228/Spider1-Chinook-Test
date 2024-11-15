@@ -1,0 +1,7 @@
+                                             QUERY PLAN                                              
+-----------------------------------------------------------------------------------------------------
+ Seq Scan on genre  (cost=0.00..12.80 rows=280 width=258) (actual time=0.003..0.005 rows=25 loops=1)
+ Planning Time: 0.366 ms
+ Execution Time: 0.025 ms
+(3 rows)
+

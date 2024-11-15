@@ -1,0 +1,7 @@
+SELECT T2.Name 
+FROM Album AS T1 
+JOIN Artist AS T2 
+ON T1.ArtistId = T2.ArtistId 
+GROUP BY T2.Name 
+ORDER BY COUNT(T1.AlbumId) DESC 
+LIMIT 1

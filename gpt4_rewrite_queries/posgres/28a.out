@@ -1,0 +1,19 @@
+                                                             QUERY PLAN                                                              
+-------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=127.38..127.39 rows=1 width=270) (actual time=1.305..1.306 rows=1 loops=1)
+   ->  Sort  (cost=127.38..128.08 rows=280 width=270) (actual time=1.304..1.305 rows=1 loops=1)
+         Sort Key: (count(t.trackid)) DESC
+         Sort Method: top-N heapsort  Memory: 25kB
+         ->  HashAggregate  (cost=123.18..125.98 rows=280 width=270) (actual time=1.282..1.287 rows=25 loops=1)
+               Group Key: g.genreid
+               Batches: 1  Memory Usage: 37kB
+               ->  Hash Join  (cost=16.30..105.67 rows=3503 width=266) (actual time=0.025..0.840 rows=3503 loops=1)
+                     Hash Cond: (t.genreid = g.genreid)
+                     ->  Seq Scan on track t  (cost=0.00..80.03 rows=3503 width=8) (actual time=0.003..0.194 rows=3503 loops=1)
+                     ->  Hash  (cost=12.80..12.80 rows=280 width=262) (actual time=0.013..0.013 rows=25 loops=1)
+                           Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                           ->  Seq Scan on genre g  (cost=0.00..12.80 rows=280 width=262) (actual time=0.003..0.005 rows=25 loops=1)
+ Planning Time: 1.697 ms
+ Execution Time: 1.361 ms
+(15 rows)
+

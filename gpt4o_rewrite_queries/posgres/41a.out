@@ -1,0 +1,10 @@
+                                               QUERY PLAN                                               
+--------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=2.75..2.76 rows=1 width=8) (actual time=0.016..0.017 rows=1 loops=1)
+   ->  Seq Scan on customer  (cost=0.00..2.74 rows=5 width=0) (actual time=0.005..0.014 rows=8 loops=1)
+         Filter: ((email)::text ~~ '%gmail.com'::text)
+         Rows Removed by Filter: 51
+ Planning Time: 0.534 ms
+ Execution Time: 0.062 ms
+(6 rows)
+
